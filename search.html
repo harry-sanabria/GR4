@@ -1,0 +1,52 @@
+<html>
+	<head>
+		<link href="bootstrap-3.1.1-dist/css/bootstrap.min.css" rel="stylesheet">
+		<link href="search.css" rel="stylesheet">
+		<link rel="stylesheet" href="jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.css">
+	    <script src="jquery-ui-1.10.4.custom/js/jquery-1.10.2.js"></script>
+	    <script src="jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js"></script>
+		
+		<script>
+			$(function() {
+			   	var patients = [
+			      "John Adams",
+			      "Ben Bitdiddle",
+			      "John Doe",
+			      "Gabriel Frattallone",
+			      "Joe Johnson",
+			      "Jan Rodriguez",
+			      "Harry Sanabria",
+			    ];
+
+			    $('#search').autocomplete({
+			    	source: patients
+			    });
+
+    			$('#go').click( function () {
+					window.location = 'john.html';
+				});
+			});
+
+		</script>
+	</head>
+
+	<body>
+		<div id="maindiv">
+			<nav class="navbar navbar-default" role="navigation">
+				<div class="container-fluid">
+    				<div class="navbar-header">
+      					<a class="navbar-brand" href="#">Health Monitor</a>
+    				</div>
+				</div>
+			</nav>
+
+			<div id="contentdiv">
+				<span id="prompt">Find Patient</span>
+				<br>
+				<input id="search" type="text" size="50">
+				<br>
+				<input id="go" type="button" value="Search">
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,16 @@
+#contentdiv {
+	position:	relative;
+	top:		190px;
+}
+
+#maindiv {
+	text-align: center;
+}
+
+#prompt {
+	font-size: 	26px;
+}
+
+#search {
+	margin: 	15px;
+}
