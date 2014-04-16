@@ -7,12 +7,7 @@
 }
 
 #alert {
-	background-color: lightgoldenrodyellow;
-	display: inline-block;
-	padding:	10px;
-	padding-left: 25px;
-	padding-right: 25px;
-	margin-bottom: 25px;
+	display: none;
 }
 
 #backbutton {
