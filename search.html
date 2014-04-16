@@ -5,6 +5,7 @@
 		<link rel="stylesheet" href="jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.css">
 	    <script src="jquery-ui-1.10.4.custom/js/jquery-1.10.2.js"></script>
 	    <script src="jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js"></script>
+	    <script src="bootstrap-3.1.1-dist/js/bootstrap.min.js"></script>
 		
 		<script>
 			$(function() {
@@ -25,6 +26,10 @@
     			$('#go').click( function () {
 					window.location = 'john.html';
 				});
+
+				$('#alertclick').click( function () {
+					window.location = 'john.html';
+				});
 			});
 
 		</script>
@@ -41,11 +46,21 @@
 			</nav>
 
 			<div id="contentdiv">
-				<span id="prompt">Find Patient</span>
-				<br>
-				<input id="search" type="text" size="50">
-				<br>
-				<input id="go" type="button" class="btn btn-primary" value="Search">
+				<a href="#" id="alertclick">
+					<div id="alertdiv">
+						<div id="alert" class="alert alert-warning">
+							John Doe has an elevated heart rate, which may be due to his Benadryl prescription.
+	    				</div>
+					</div>
+				</a>
+
+				<div id="searchdiv">
+					<span id="prompt">Find Patient</span>
+					<br>
+					<input id="search" type="text" size="50">
+					<br>
+					<input id="go" type="button" class="btn btn-primary" value="Search">
+				</div>
 			</div>
 		</div>
 	</body>

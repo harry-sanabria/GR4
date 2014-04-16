@@ -75,3 +75,8 @@
 	font-size: 24px;
 }
 
+#alert {
+	background-color: lightcoral;
+	color: black;
+}
+

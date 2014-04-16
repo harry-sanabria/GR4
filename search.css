@@ -1,6 +1,6 @@
-#contentdiv {
+#searchdiv {
 	position:	relative;
-	top:		190px;
+	top:		100px;
 }
 
 #maindiv {
@@ -13,4 +13,16 @@
 
 #search {
 	margin: 	15px;
+}
+
+#alertdiv {
+	height: 	100px;
+	overflow: 	scroll;
+	width: 		800px;
+	display: 	inline-block;
+}
+
+#alert {
+	background-color: lightcoral;
+	color: black;
 }

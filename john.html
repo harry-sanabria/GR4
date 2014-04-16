@@ -50,6 +50,16 @@
 	    			e.preventDefault();
 	    		});
 
+	    		$('.popover-markup>.trigger').popover({
+    				html: true,
+    				title: function () {
+        				return $(this).parent().find('.head').html();
+    				},
+    				content: function () {
+        				return $(this).parent().find('.content').html();
+    				}
+				});
+
 	    	});
 	    </script>
 	</head>
@@ -167,6 +177,19 @@
 								<td>Stomach ache</td>
 								<td></td>
 							</tr>
+							<tr class="hide">
+								<td>
+									<a href="#" class="disabled">edit</a>
+								</td>
+								<td>
+									<a href="#" class="disabled">remove</a>
+								</td>
+								<td>Benadryl</td>
+								<td>50mg/24hr</td>
+								<td>Dr. Tran</td>
+								<td>Allergy</td>
+								<td></td>
+							</tr>						
 						</tbody>
 					</table>
 
