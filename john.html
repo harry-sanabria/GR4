@@ -14,7 +14,7 @@
 
 	    		var selected_metric = "pressure";
 
-	    		$('#bp').click(function () {
+	    		$('#bp').click(function (e) {
 	    			$(this).addClass('selected');
 	    			$('#hr').removeClass('selected');
 	    			$('#w').removeClass('selected');
@@ -24,10 +24,13 @@
 	    			//change graph
 	    			graph_img.attr("src", "images/pressure_"+getTimeSelection()+".png");
 
-
 	    		});
 
-	    		$('#hr').click(function () {
+	    		$('#bp').mousedown(function(e){
+	    			e.preventDefault();
+	    		});
+
+	    		$('#hr').click(function (e) {
 	    			$(this).addClass('selected');
 	    			$('#bp').removeClass('selected');
 	    			$('#w').removeClass('selected');
@@ -35,11 +38,14 @@
 	    			selected_metric = "bpm";
 
 	    			//change graph
-	    			graph_img.attr("src", "images/bpm_"+getTimeSelection()+".png");
-	    			
+	    			graph_img.attr("src", "images/bpm_"+getTimeSelection()+".png");	    			
 	    		});
 
-	    		$('#w').click(function () {
+	    		$('#hr').mousedown(function(e){
+	    			e.preventDefault();
+	    		});
+
+	    		$('#w').click(function (e) {
 	    			$(this).addClass('selected');
 	    			$('#hr').removeClass('selected');
 	    			$('#bp').removeClass('selected');
@@ -48,7 +54,10 @@
 
 	    			//change graph
 	    			graph_img.attr("src", "images/weight_"+getTimeSelection()+".png");
-	    			
+	    		});
+
+	    		$('#w').mousedown(function(e){
+	    			e.preventDefault();
 	    		});
 
 	    		$('#timeselect').change(function (e) {
