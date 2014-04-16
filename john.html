@@ -9,10 +9,6 @@
 	    <script>
 	    	$(function () {
 
-	    		$('#dismiss').click(function () {
-	    			$('#alert').remove();
-	    		});
-
 	    		$('#backbutton').click(function () {
 	    			window.location = "search.html";
 	    		});
@@ -32,10 +28,10 @@
 				</div>
 			</nav>
 
-			<div id="alert">
-				John Doe has an elevated heart rate, which may be due to his Benadryl prescription. &nbsp;&nbsp;
-				<a id="dismiss" href="#">Dismiss</a> 
-			</div>
+			<div class="alert alert-warning fade in">
+      			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+				<strong>John Doe has an elevated heart rate, which may be due to his Benadryl prescription.</strong>
+    		</div>
 
 			<br>
 
