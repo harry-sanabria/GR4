@@ -6,13 +6,104 @@
 	    <script src="jquery-ui-1.10.4.custom/js/jquery-1.10.2.js"></script>
 	    <script src="jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js"></script>
 	    <script src="bootstrap-3.1.1-dist/js/bootstrap.min.js"></script>
+	    <script src="http://code.highcharts.com/highcharts.js"></script>
+            <script src="http://code.highcharts.com/modules/exporting.js"></script>
 	    <script>
 	    	$(function () {
 
-	    		var graph_img = $("#graph-img");
 	    		var medicines_img = $("#medicines-img");
 
 	    		var selected_metric = "pressure";
+	    		
+	    		var generate_graph = function (yaxis, xaxis) {
+	    			var series;
+	    			if (yaxis === 'mmHg') {
+	    				//get blood pressure data
+	    				if (xaxis === '1 year') {
+	    				        series = [{
+                					name: 'Systolic',
+                					data: [135, 120, 155, 150, 150, 140, 155, 150, 160, 155, 155, 160],
+                                                        color: 'blue'
+            					}, {
+                					name: 'Diastolic',
+                					data: [75, 65, 70, 60, 75, 70, 60, 80, 75, 70, 60, 70],
+                					color: 'red'
+            					}]
+	    				} else if (xaxis === '6 months') {
+	    				        series = [{
+                					name: 'Systolic',
+                					data: [155, 150, 160, 155, 155, 160],
+                                                        color: 'blue'
+            					}, {
+                					name: 'Diastolic',
+                					data: [60, 80, 75, 70, 60, 70],
+                					color: 'red'
+            					}]
+	    				}
+	    			}
+	    			else if (yaxis === 'bpm') {
+	    				//get heart rate data
+	    				if (xaxis === '1 year') {
+	    				        series = [{
+                					data: [65, 70, 65, 75, 100, 105, 70, 75, 70, 70, 70, 70]
+            					}]
+	    				} else if (xaxis === '6 months') {
+	    				        series = [{
+                					data: [70, 75, 70, 70, 70, 70]
+            					}]
+	    				}
+	    			}
+	    			else if (yaxis === 'lbs') {
+	    				//get weight data
+	    				if (xaxis === '1 year') {
+	    				        series = [{
+                					data: [150, 155, 160, 170, 165, 155, 155, 160, 160, 155, 160, 165]
+            					}]
+	    				} else if (xaxis === '6 months') {
+	    				        series = [{
+                					data: [155, 160, 160, 155, 160, 165]
+            					}]
+	    				}
+	    			}
+	    			var categories;
+	    			if (xaxis === '1 year') {
+	    			        categories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+	    			}
+	    			else if (xaxis === '6 months') {
+	    			        categories = ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+	    			}
+	    			$(function () {
+                                        $('#graph-container').highcharts({
+                                                title: {
+                                                        text: '',
+                                                        x: -20 //center
+                                                },
+                                                xAxis: {
+                                                        categories: categories
+                                                },
+                                                yAxis: {
+                                                        title: {
+                                                                text: yaxis
+                                                        },
+                                                        plotLines: [{
+                                                                value: 0,
+                                                                width: 1,
+                                                                color: '#808080'
+                                                        }]
+                                                },
+                                                tooltip: {
+                                                        valueSuffix: yaxis
+                                                },
+                                                legend: {
+                                                        layout: 'vertical',
+                                                        align: 'right',
+                                                        verticalAlign: 'middle',
+                                                        borderWidth: 0
+                                                },
+                                                series: series
+                                        });
+                                });
+	    		}
 
 	    		$('#bp').click(function (e) {
 	    			$(this).addClass('selected');
@@ -22,7 +113,7 @@
 	    			selected_metric = "pressure";
 
 	    			//change graph
-	    			graph_img.attr("src", "images/pressure_"+getTimeSelection()+".png");
+	    			generate_graph('mmHg', getTimeSelection());
 
 	    		});
 
@@ -38,7 +129,7 @@
 	    			selected_metric = "bpm";
 
 	    			//change graph
-	    			graph_img.attr("src", "images/bpm_"+getTimeSelection()+".png");	    			
+	    			generate_graph('bpm', getTimeSelection());	    			
 	    		});
 
 	    		$('#hr').mousedown(function(e){
@@ -53,7 +144,7 @@
 	    			selected_metric = "weight";
 
 	    			//change graph
-	    			graph_img.attr("src", "images/weight_"+getTimeSelection()+".png");
+	    			generate_graph('lbs', getTimeSelection());
 	    		});
 
 	    		$('#w').mousedown(function(e){
@@ -110,7 +201,7 @@
 
     			function getTimeSelection() {
 
-    				var time_string =  $("#timeselect").val() == 1 ? "year" : "6mo";
+    				var time_string =  $("#timeselect").val() == 1 ? "1 year" : "6 months";
 
     				return time_string;
     			}
@@ -175,7 +266,7 @@
 				<br><br>
 				<div id="graphs-wrapper">
 					<div id="graphs">
-						<img id="graph-img" src="images/pressure_year.png" alt="Blood Pressure">
+						<div id="graph-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 					</div>
 					<img id="medicines-img" src="images/medicines_year.png" alt="Medicines">
 				<div>
