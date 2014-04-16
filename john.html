@@ -9,11 +9,46 @@
 	    <script>
 	    	$(function () {
 
+	    		$('#bp').click(function() {
+	    			$('#hr').removeClass('active');
+	    			$('#w').removeClass('active');
+
+	    			//change graph
+
+	    		});
+
+	    		$('#hr').click(function() {
+	    			$('#bp').removeClass('active');
+	    			$('#w').removeClass('active');
+
+	    			//change graph
+	    			
+	    		});
+
+	    		$('#w').click(function() {
+	    			$('#hr').removeClass('active');
+	    			$('#bp').removeClass('active');
+
+	    			//change graph
+	    			
+	    		});
+
+	    		$('#timeselect').change(function () {
+	    			alert($(this).val());
+
+	    			//change graph
+
+	    		});
+
 	    		$('#backbutton').click(function () {
 	    			window.location = "search.html";
 	    		});
 
 	    		$('#alert').delay(500).fadeIn(500);
+
+	    		$('.disabled').click(function (e) {
+	    			e.preventDefault();
+	    		});
 
 	    	});
 	    </script>
@@ -54,10 +89,18 @@
 
 				<br>
 
-				<div class="btn-group">
-  					<button id="bp" type="button" class="btn btn-default active">Blood Pressure</button>
-  					<button id="hr" type="button" class="btn btn-default">Heart Rate</button>
-  					<button id="w" type="button" class="btn btn-default">Weight</button>
+				<div class="fixwidth">
+					<div class="btn-group btn-group-justified">
+						<div class="btn-group">
+	  						<button id="bp" type="button" class="btn btn-default active">Blood Pressure</button>
+	  					</div>
+	  					<div class="btn-group">
+	  						<button id="hr" type="button" class="btn btn-default">Heart Rate</button>
+	  					</div>
+	  					<div class="btn-group">
+	  						<button id="w" type="button" class="btn btn-default">Weight</button>
+	  					</div>
+					</div>
 				</div>
 
 				<br><br>
@@ -100,10 +143,10 @@
 						<tbody>
 							<tr>
 								<td>
-									<a href="#">edit</a>
+									<a href="#" class="disabled">edit</a>
 								</td>
 								<td>
-									<a href="#">remove</a>
+									<a href="#" class="disabled">remove</a>
 								</td>
 								<td>Tylenol</td>
 								<td>100mg/24hrs</td>
@@ -113,10 +156,10 @@
 							</tr>
 							<tr>
 								<td>
-									<a href="#">edit</a>
+									<a href="#" class="disabled">edit</a>
 								</td>
 								<td>
-									<a href="#">remove</a>
+									<a href="#" class="disabled">remove</a>
 								</td>
 								<td>Pepto-Bismol</td>
 								<td>30ml/hr</td>
