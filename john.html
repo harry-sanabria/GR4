@@ -9,7 +9,7 @@
 	    <script>
 	    	$(function () {
 
-	    		$('#bp').click(function() {
+	    		$('#bp').click(function () {
 	    			$('#hr').removeClass('active');
 	    			$('#w').removeClass('active');
 
@@ -17,7 +17,7 @@
 
 	    		});
 
-	    		$('#hr').click(function() {
+	    		$('#hr').click(function () {
 	    			$('#bp').removeClass('active');
 	    			$('#w').removeClass('active');
 
@@ -25,7 +25,7 @@
 	    			
 	    		});
 
-	    		$('#w').click(function() {
+	    		$('#w').click(function () {
 	    			$('#hr').removeClass('active');
 	    			$('#bp').removeClass('active');
 
@@ -58,7 +58,24 @@
     				content: function () {
         				return $(this).parent().find('.content').html();
     				}
-				});
+				}).on('click', function(e) {
+
+					$('.popover').on('click', function(e) {
+			            e.stopPropagation(); 
+			        });
+
+			        $('.popover').on('click', '#addmed', function(e) {
+			        	$('#benadryl').removeClass('hide');
+						$('#prescribe').popover('hide');
+			            e.stopPropagation(); 
+			        });
+
+        			e.stopPropagation();
+    			});
+
+				$(document).on('click', function() {
+        			$('#prescribe').popover('hide');
+    			});
 
 	    	});
 	    </script>
@@ -137,7 +154,31 @@
 							<tr>
 								<th colspan="5" class="theader bigfont center">Current Medications</th>
 								<td colspan="2" class="theader">
-									<button type="button" class="btn btn-primary">Prescribe New</button>								
+									<div class="popover-markup"> 
+										<button id="prescribe" type="button popover-markup" class="btn btn-primary trigger" data-placement="top">Prescribe New</button>
+    									<div class="head hide">Prescribe New Medication</div>
+    									<div class="content hide">
+	        								<div class="form-group">
+	            								<input type="text" class="form-control norm" size="56" placeholder="Name of Medication">
+	            								<input type="text" class="form-control norm" size="4" placeholder="0">
+	            								<select class="form-control norm">
+													<option value="1">ml</option>
+													<option value="2">mg</option>
+													<option value="3">tbsp</option>
+												</select>
+												per
+	            								<input type="text" class="form-control norm" size="4" placeholder="0">
+	            								<select class="form-control norm">
+													<option value="1">hrs</option>
+													<option value="2">days</option>
+													<option value="3">weeks</option>
+												</select>	 
+	            								<input type="text" class="form-control norm" size="56" placeholder="Reason">
+												<textarea class="form-control norm" cols="58" placeholder="Comment..."></textarea> 
+	        									<button id="addmed" type="button" class="btn btn-default btn-block">Add</button>
+											</div>
+   	 									</div>
+									</div>
 								</td>
 							</tr>
 							<tr>
@@ -177,7 +218,7 @@
 								<td>Stomach ache</td>
 								<td></td>
 							</tr>
-							<tr class="hide">
+							<tr id="benadryl" class="hide">
 								<td>
 									<a href="#" class="disabled">edit</a>
 								</td>

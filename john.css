@@ -8,6 +8,8 @@
 
 #alert {
 	display: none;
+	background-color: lightcoral;
+	color: black;
 }
 
 #backbutton {
@@ -75,8 +77,29 @@
 	font-size: 24px;
 }
 
-#alert {
-	background-color: lightcoral;
-	color: black;
+.popover-title {
+	background-color: #428bca;
+	text-align: center;
+	font-size: 16px;
+	color: #fff;
+}
+
+.norm {
+	width: auto;
+	display: inline-block;
+	color: #333;
+}
+
+.popover {
+	min-width: 450px;
+}
+
+.form-control {
+	margin: 10px;
+}
+
+#addmed {
+	width: 80px;
+	margin: 0 auto;
 }
 
