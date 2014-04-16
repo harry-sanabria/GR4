@@ -55,6 +55,10 @@
 	border: solid 1px;
 }
 
+#medtable {
+	margin-bottom: 0px;
+}
+
 #medtable.table>thead>tr>th {
 	border-bottom: 0px;
 }
