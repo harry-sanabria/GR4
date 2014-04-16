@@ -1,15 +1,30 @@
 <html>
 	<head>
 		<link href="bootstrap-3.1.1-dist/css/bootstrap.min.css" rel="stylesheet">
-		<link href="search.css" rel="stylesheet">
+		<link href="john.css" rel="stylesheet">
 		<link rel="stylesheet" href="jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.css">
 	    <script src="jquery-ui-1.10.4.custom/js/jquery-1.10.2.js"></script>
 	    <script src="jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js"></script>
+	    <script src="bootstrap-3.1.1-dist/js/bootstrap.min.js"></script>
+	    <script>
+	    	$(function () {
+
+	    		$('#dismiss').click(function () {
+	    			$('#alert').remove();
+	    		});
+
+	    		$('#backbutton').click(function () {
+	    			window.location = "search.html";
+	    		});
+
+	    	});
+	    </script>
 	</head>
 
 	<body>
 		<div id="maindiv">
-			<nav class="navbar navbar-default" role="navigation">
+
+			<nav id="patientnav" class="navbar navbar-default" role="navigation">
 				<div class="container-fluid">
     				<div class="navbar-header">
       					<a class="navbar-brand" href="search.html">Health Monitor</a>
@@ -17,8 +32,107 @@
 				</div>
 			</nav>
 
+			<div id="alert">
+				John Doe has an elevated heart rate, which may be due to his Benadryl prescription. &nbsp;&nbsp;
+				<a id="dismiss" href="#">Dismiss</a> 
+			</div>
+
+			<br>
+
 			<div id="contentdiv">
-				Some Content
+				<input id="backbutton" type="button" class="btn btn-primary" value="Back">
+				<table id="patientinfo">
+					<tr>
+						<th>&nbsp;</th>
+						<th>John Doe</th>
+						<th>&nbsp;</th>
+					</tr>
+					<tr>
+						<td>Age: 21</td>
+						<td>Blood Type: B-</td>
+						<td>Gender: M</td>
+					</tr>
+				</table>
+
+				<br>
+
+				<div class="btn-group">
+  					<button id="bp" type="button" class="btn btn-default active">Blood Pressure</button>
+  					<button id="hr" type="button" class="btn btn-default">Heart Rate</button>
+  					<button id="w" type="button" class="btn btn-default">Weight</button>
+				</div>
+
+				<br><br>
+
+				<div id="graphs">
+					Some graphs
+				</div>
+
+				<br>
+
+				<select id="timeselect" class="form-control">
+					<option value="1">1 year</option>
+					<option value="2">6 months</option>
+					<option value="3">1 month</option>
+					<option value="4">1 week</option>
+				</select>
+
+				<br><br><br>
+
+				<div id="medications">
+
+					<table id="medtable" class="table">
+						<thead>
+							<tr>
+								<th colspan="5" class="theader bigfont center">Current Medications</th>
+								<td colspan="2" class="theader">
+									<button type="button" class="btn btn-primary">Prescribe New</button>								
+								</td>
+							</tr>
+							<tr>
+								<th>&nbsp;</th>
+								<th>&nbsp;</th>
+								<th>Name</th>
+								<th>Dose</th>
+								<th>Prescribed By</th>
+								<th>Reason</th>
+								<th>Comment</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<a href="#">edit</a>
+								</td>
+								<td>
+									<a href="#">remove</a>
+								</td>
+								<td>Tylenol</td>
+								<td>100mg/24hrs</td>
+								<td>Dr. No</td>
+								<td>Headache</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>
+									<a href="#">edit</a>
+								</td>
+								<td>
+									<a href="#">remove</a>
+								</td>
+								<td>Pepto-Bismol</td>
+								<td>30ml/hr</td>
+								<td>Dr. Tran</td>
+								<td>Stomach ache</td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+
+				<br><br>
+
 			</div>
 		</div>
 	</body>

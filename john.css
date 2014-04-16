@@ -1,0 +1,73 @@
+#maindiv {
+	text-align: center;
+}
+
+#patientnav {
+	margin-bottom: 5px;
+}
+
+#alert {
+	background-color: lightgoldenrodyellow;
+	display: inline-block;
+	padding:	10px;
+	padding-left: 25px;
+	padding-right: 25px;
+	margin-bottom: 25px;
+}
+
+#backbutton {
+	position: absolute;
+	left: 325px;
+}
+
+#patientinfo {
+	min-width: 600px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+#patientinfo td {
+	padding: 20px;
+	font-size: 18px;
+}
+
+#patientinfo th {
+	text-align: center;
+	font-size: 24px;
+}
+
+#graphs {
+	width: 700px;
+	height: 300px;
+	border: solid 1px;
+	margin: 0 auto;
+}
+
+#timeselect {
+	width: auto;
+	display: inline-block;
+	color: #333;
+}
+
+#medications {
+	width: 75%;
+	display: inline-block;
+	border: solid 1px;
+}
+
+#medtable.table>thead>tr>th {
+	border-bottom: 0px;
+}
+
+.center {
+	text-align: center;
+}
+
+.theader {
+	border-bottom: 3px solid black !important;
+}
+
+.bigfont {
+	font-size: 24px;
+}
+
