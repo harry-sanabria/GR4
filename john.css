@@ -39,10 +39,30 @@
 }
 
 #graphs {
-	width: 700px;
-	height: 300px;
-	border: solid 1px;
+	width: 698px;
+	height: 400px;
 	margin: 0 auto;
+}
+
+#graphs img {
+	width: inherit;
+	height: inherit;
+	padding: 1 auto;
+}
+
+#graphs-wrapper {
+
+	width: 700px;
+	height: 450px;
+	margin: 0 auto;
+	border: solid 1px;
+
+}
+
+#medicines-img {
+	width: 550px;
+	height: 48px;
+	padding: 1 auto;
 }
 
 #timeselect {
@@ -52,7 +72,7 @@
 }
 
 #medications {
-	width: 75%;
+	width: 100%;
 	display: inline-block;
 	border: solid 1px;
 }
@@ -101,5 +121,9 @@
 #addmed {
 	width: 80px;
 	margin: 0 auto;
+}
+
+button.selected {
+	background-color: #ddd;
 }
 
