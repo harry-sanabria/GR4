@@ -107,7 +107,9 @@
                                                 series: series
                                         });
                                 });
-	    		}
+	    		};
+	    		
+	    		generate_graph('mmHg', '1 year');
 
 	    		$('#bp').click(function (e) {
 	    			$(this).addClass('selected');
@@ -160,8 +162,12 @@
 	    			//change graph
 
 	    			generate_graph(selected_metric, getTimeSelection());
-	    			medicines_img.attr("src", "images/medicines_"+getTimeSelection()+".png");
-
+	    			if (getTimeSelection === '1 year') {
+	    				medicines_img.attr("src", "images/medicines_year.png");
+	    			}
+	    			else if (getTimeSelection === '6 months') {
+	    				medicines_img.attr("src", "images/medicines_6mo.png");
+	    			}
 	    			e.preventDefault();
 
 	    		});
