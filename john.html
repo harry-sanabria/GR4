@@ -13,9 +13,11 @@
 
 	    		var medicines_img = $("#medicines-img");
 
-	    		var selected_metric = "pressure";
+	    		var selected_metric = "mmHg";
 	    		
-	    		var generate_graph = function (yaxis, xaxis) {
+	    		var generate_graph = function () {
+				var xaxis = getTimeSelection();
+				var yaxis = selected_metric;
 	    			var series;
 	    			if (yaxis === 'mmHg') {
 	    				//get blood pressure data
@@ -45,12 +47,12 @@
 	    				//get heart rate data
 	    				if (xaxis === '1 year') {
 	    				        series = [{
-	    				        	name: '',
+	    				        	name: 'bpm',
                 					data: [65, 70, 65, 75, 100, 105, 70, 75, 70, 70, 70, 70]
             					}]
 	    				} else if (xaxis === '6 months') {
 	    				        series = [{
-	    				        	name: '',
+	    				        	name: 'bpm',
                 					data: [70, 75, 70, 70, 70, 70]
             					}]
 	    				}
@@ -59,12 +61,12 @@
 	    				//get weight data
 	    				if (xaxis === '1 year') {
 	    				        series = [{
-	    				        	name: '',
+	    				        	name: 'lbs',
                 					data: [150, 155, 160, 170, 165, 155, 155, 160, 160, 155, 160, 165]
             					}]
 	    				} else if (xaxis === '6 months') {
 	    				        series = [{
-	    				        	name: '',
+	    				        	name: 'lbs',
                 					data: [155, 160, 160, 155, 160, 165]
             					}]
 	    				}
@@ -109,17 +111,17 @@
                                 });
 	    		};
 	    		
-	    		generate_graph('mmHg', '1 year');
+	    		generate_graph();
 
 	    		$('#bp').click(function (e) {
 	    			$(this).addClass('selected');
 	    			$('#hr').removeClass('selected');
 	    			$('#w').removeClass('selected');
 
-	    			selected_metric = "pressure";
+	    			selected_metric = "mmHg";
 
 	    			//change graph
-	    			generate_graph('mmHg', getTimeSelection());
+	    			generate_graph();
 
 	    		});
 
@@ -135,7 +137,7 @@
 	    			selected_metric = "bpm";
 
 	    			//change graph
-	    			generate_graph('bpm', getTimeSelection());	    			
+	    			generate_graph();	    			
 	    		});
 
 	    		$('#hr').mousedown(function(e){
@@ -147,10 +149,10 @@
 	    			$('#hr').removeClass('selected');
 	    			$('#bp').removeClass('selected');
 
-	    			selected_metric = "weight";
+	    			selected_metric = "lbs";
 
 	    			//change graph
-	    			generate_graph('lbs', getTimeSelection());
+	    			generate_graph();
 	    		});
 
 	    		$('#w').mousedown(function(e){
@@ -160,12 +162,11 @@
 	    		$('#timeselect').change(function (e) {
 
 	    			//change graph
-
-	    			generate_graph(selected_metric, getTimeSelection());
-	    			if (getTimeSelection === '1 year') {
+	    			generate_graph();
+	    			if (getTimeSelection() === '1 year') {
 	    				medicines_img.attr("src", "images/medicines_year.png");
 	    			}
-	    			else if (getTimeSelection === '6 months') {
+	    			else if (getTimeSelection() === '6 months') {
 	    				medicines_img.attr("src", "images/medicines_6mo.png");
 	    			}
 	    			e.preventDefault();
