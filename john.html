@@ -10,74 +10,96 @@
             <script src="http://code.highcharts.com/modules/exporting.js"></script>
 	    <script>
 	    	$(function () {
-
-	    		var medicines_img = $("#medicines-img");
-
 	    		var selected_metric = "mmHg";
+
+			var getPatientData = function (metric, minDate) {
+				//TODO: dummy data.
+	    			if (metric === 'mmHg') {
+	    				//get blood pressure data
+	    				return [{
+                			    name: 'Systolic',
+                			    data: [[Date.UTC(2013, 4), 135], [Date.UTC(2013, 5), 120], [Date.UTC(2013, 6), 155], [Date.UTC(2013, 7), 150], [Date.UTC(2013, 8), 150], [Date.UTC(2013, 9), 140], [Date.UTC(2013, 10), 155], [Date.UTC(2013, 11), 150], [Date.UTC(2014, 0), 160], [Date.UTC(2014, 1), 155], [Date.UTC(2014, 2), 155], [Date.UTC(2014, 3), 160], [Date.UTC(2014, 4), 165]],
+                                            color: 'blue'
+            				}, {
+                			    name: 'Diastolic',
+                			    data: [[Date.UTC(2013, 4), 75], [Date.UTC(2013, 5), 65], [Date.UTC(2013, 6), 70], [Date.UTC(2013, 7), 60], [Date.UTC(2013, 8), 75], [Date.UTC(2013, 9), 70], [Date.UTC(2013, 10), 60], [Date.UTC(2013, 11), 80], [Date.UTC(2014, 0), 75], [Date.UTC(2014, 1), 70], [Date.UTC(2014, 2), 60], [Date.UTC(2014, 3), 70], [Date.UTC(2014, 4), 65]],
+                			    color: 'red'
+            				}];	
+	    			}
+	    			else if (metric === 'bpm') {
+	    				//get heart rate data
+	    				return [{
+	    				    name: 'bpm',
+                			    data: [[Date.UTC(2013, 4), 65], [Date.UTC(2013, 5), 70], [Date.UTC(2013, 6), 65], [Date.UTC(2013, 7), 75], [Date.UTC(2013, 8), 100], [Date.UTC(2013, 9), 105], [Date.UTC(2013, 10), 70], [Date.UTC(2013, 11), 75], [Date.UTC(2014, 0), 85], [Date.UTC(2014, 1), 95], [Date.UTC(2014, 2), 80], [Date.UTC(2014, 3), 70], [Date.UTC(2014, 4), 75]]
+            				}];
+	    			}
+	    			else if (metric === 'lbs') {
+	    				//get weight data
+	    				return [{
+	    				    name: 'lbs',
+                			    data: [[Date.UTC(2013, 4), 150], [Date.UTC(2013, 5), 155], [Date.UTC(2013, 6), 160], [Date.UTC(2013, 7), 170], [Date.UTC(2013, 8), 165], [Date.UTC(2013, 9), 155], [Date.UTC(2013, 10), 155], [Date.UTC(2013, 11), 160], [Date.UTC(2014, 0), 160], [Date.UTC(2014, 1), 155], [Date.UTC(2014, 2), 160], [Date.UTC(2014, 3), 165], [Date.UTC(2014, 4), 170]]
+            				}];
+	    			}
+			}
+			var getMedicineData = function (min_date) {
+				//TODO: dummy data.
+				var data = [{
+				    low: Date.UTC(2013, 5, 1),
+				    y: Date.UTC(2014, 4, 1),
+				    color: 'green',
+				    name: 'Tylenol'
+				}, {
+				    low: Date.UTC(2013, 10, 21),
+				    y: Date.UTC(2014, 3, 28),
+				    color: 'blue',
+				    name: 'Pepto-Bismol'
+				}, {
+				    low: Date.UTC(2013, 3, 15),
+				    y: Date.UTC(2014, 2, 28),
+				    color: 'red',
+				    name: 'Benadryl'
+				}, {
+				    low: Date.UTC(2014, 0, 15),
+				    y: Date.UTC(2014, 1, 28),
+				    color: 'yellow',
+				    name: 'Advil'
+				}];
+				return data.filter( function(element) {
+					return element.y >= min_date;
+				});
+			};
 	    		
-	    		var generate_graph = function () {
+	    		var generate_graphs = function () {
 				var xaxis = getTimeSelection();
 				var yaxis = selected_metric;
 	    			var series;
-	    			if (yaxis === 'mmHg') {
-	    				//get blood pressure data
-	    				if (xaxis === '1 year') {
-	    				        series = [{
-                					name: 'Systolic',
-                					data: [135, 120, 155, 150, 150, 140, 155, 150, 160, 155, 155, 160],
-                                                        color: 'blue'
-            					}, {
-                					name: 'Diastolic',
-                					data: [75, 65, 70, 60, 75, 70, 60, 80, 75, 70, 60, 70],
-                					color: 'red'
-            					}]
-	    				} else if (xaxis === '6 months') {
-	    				        series = [{
-                					name: 'Systolic',
-                					data: [155, 150, 160, 155, 155, 160],
-                                                        color: 'blue'
-            					}, {
-                					name: 'Diastolic',
-                					data: [60, 80, 75, 70, 60, 70],
-                					color: 'red'
-            					}]
-	    				}
-	    			}
-	    			else if (yaxis === 'bpm') {
-	    				//get heart rate data
-	    				if (xaxis === '1 year') {
-	    				        series = [{
-	    				        	name: 'bpm',
-                					data: [65, 70, 65, 75, 100, 105, 70, 75, 70, 70, 70, 70]
-            					}]
-	    				} else if (xaxis === '6 months') {
-	    				        series = [{
-	    				        	name: 'bpm',
-                					data: [70, 75, 70, 70, 70, 70]
-            					}]
-	    				}
-	    			}
-	    			else if (yaxis === 'lbs') {
-	    				//get weight data
-	    				if (xaxis === '1 year') {
-	    				        series = [{
-	    				        	name: 'lbs',
-                					data: [150, 155, 160, 170, 165, 155, 155, 160, 160, 155, 160, 165]
-            					}]
-	    				} else if (xaxis === '6 months') {
-	    				        series = [{
-	    				        	name: 'lbs',
-                					data: [155, 160, 160, 155, 160, 165]
-            					}]
-	    				}
-	    			}
-	    			var categories;
-	    			if (xaxis === '1 year') {
-	    			        categories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-	    			}
-	    			else if (xaxis === '6 months') {
-	    			        categories = ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-	    			}
+				var new_date = new Date(2014, 4);
+				switch(xaxis) {
+					case '1 year':
+						new_date.setFullYear(new_date.getFullYear()-1);
+						break;
+					case '6 months':
+						new_date.setFullYear(new_date.getFullYear(), new_date.getMonth()-6);
+						break;
+					case '1 month':
+						new_date.setFullYear(new_date.getFullYear(), new_date.getMonth()-1);
+						break;
+					case '1 week':
+						new_date = new Date(new_date.getTime() - (1000*60*60*24*7));
+						break;
+				}
+				var minDate = Date.UTC(new_date.getUTCFullYear(),
+						       new_date.getUTCMonth(), 
+						       new_date.getUTCDate(),
+						       new_date.getUTCHours(),
+						       new_date.getUTCMinutes(),
+						       new_date.getUTCSeconds());
+				
+				var series = getPatientData(yaxis, minDate);
+				var day_offset = 1000*60*60*24;
+				if (xaxis === '1 week') {
+					day_offset = 1000*60*60*5;
+				}
 	    			$(function () {
                                         $('#graph-container').highcharts({
                                                 title: {
@@ -85,9 +107,11 @@
                                                         x: -20 //center
                                                 },
                                                 xAxis: {
-                                                        categories: categories
+                                                        type: 'datetime',
+							min: minDate-day_offset
                                                 },
                                                 yAxis: {
+							allowDecimals: false,
                                                         title: {
                                                                 text: yaxis
                                                         },
@@ -109,9 +133,99 @@
                                                 series: series
                                         });
                                 });
-	    		};
+				var today = Date.UTC(2014, 4);
+				var medicines = ['Benadryl', 'Advil', 'Robitussin', 'Tylenol'];
+				var medicine_data = getMedicineData(minDate);
+				var medicines = medicine_data.map(function(element) {return element.name;});
+				var medicines_width = 592;
+				if (yaxis === 'bpm') {
+					medicines_width = 618;
+				}
+				else if (yaxis === 'lbs') {
+					medicines_width = 627;
+				}
+				$('#graphs-wrapper').height(450+25*medicine_data.length);
+				$('#space-container1').html(new Array(5+medicine_data.length).join("<br>"));
+
+				var chart = new Highcharts.Chart({
+
+				    chart: {
+					renderTo: 'medicines-container',
+					type: 'bar',
+					height: 40+25*medicine_data.length,
+                                        width: medicines_width
+				    },
+				    
+				    plotOptions: {
+					bar: {
+					    pointWidth: 20,
+					    dataLabels: {
+						enabled: true,
+						inside: true,
+						borderRadius: 1,
+						borderColor: 'black',
+						formatter: function () {
+						    return this.x
+						},
+						style: {
+							color: 'black',
+							fontWeight: 'bold',
+						    fontSize: 'larger',
+						    textShadow: '-1px 0 white, 0 1px white, 1px 0 white, 0 -1px white'
+						}
+					    }
+					}
+				    },
+				    
+				    title: {
+					text: null  
+				    },
+				    
+				    legend: {
+					enabled: false
+				    },
+
+				    xAxis: {
+					categories: medicines,
+					labels: {
+					    enabled: false
+					},
+					tickLength: 0,
+					lineWidth: 0,
+					offset: 64
+				    },
+					    
+				    yAxis: {
+					type: 'datetime',
+					min: minDate,
+					max: today,
+					endOnTick: false,
+					labels: {
+					    staggerLines: 1,
+					    overflow: 'justify'
+					},
+					title: {
+					    enabled: false
+					}
+				    },
+					    
+					    tooltip: {
+						formatter: function() {
+						    var point = this.point;
+						    return '<b>'+ point.category +'</b><br/>'+
+							Highcharts.dateFormat('%b %e, %Y', point.low) + ' - ' +
+							Highcharts.dateFormat('%b %e, %Y', point.y);
+						} 
+					    },
+
+				    series: [{
+					data: medicine_data
+				    }]
+
+				});
+			};
 	    		
-	    		generate_graph();
+	    		generate_graphs();
 
 	    		$('#bp').click(function (e) {
 	    			$(this).addClass('selected');
@@ -121,7 +235,7 @@
 	    			selected_metric = "mmHg";
 
 	    			//change graph
-	    			generate_graph();
+	    			generate_graphs();
 
 	    		});
 
@@ -137,7 +251,7 @@
 	    			selected_metric = "bpm";
 
 	    			//change graph
-	    			generate_graph();	    			
+	    			generate_graphs();	    			
 	    		});
 
 	    		$('#hr').mousedown(function(e){
@@ -152,7 +266,7 @@
 	    			selected_metric = "lbs";
 
 	    			//change graph
-	    			generate_graph();
+	    			generate_graphs();
 	    		});
 
 	    		$('#w').mousedown(function(e){
@@ -162,13 +276,7 @@
 	    		$('#timeselect').change(function (e) {
 
 	    			//change graph
-	    			generate_graph();
-	    			if (getTimeSelection() === '1 year') {
-	    				medicines_img.attr("src", "images/medicines_year.png");
-	    			}
-	    			else if (getTimeSelection() === '6 months') {
-	    				medicines_img.attr("src", "images/medicines_6mo.png");
-	    			}
+	    			generate_graphs();
 	    			e.preventDefault();
 
 	    		});
@@ -211,10 +319,7 @@
     			});
 
     			function getTimeSelection() {
-
-    				var time_string =  $("#timeselect").val() == 1 ? "1 year" : "6 months";
-
-    				return time_string;
+    				return $("#timeselect").val();
     			}
 
 				$(document).on('click', function() {
@@ -278,19 +383,19 @@
 				<div id="graphs-wrapper">
 					<div id="graphs">
 						<div id="graph-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+						<div id="medicines-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 					</div>
-					<img id="medicines-img" src="images/medicines_year.png" alt="Medicines">
 				<div>
-
-				<br>
-
+				<div id="space-container1">
+				</div>
 				<select id="timeselect" class="form-control">
-					<option value="1">1 year</option>
-					<option value="2">6 months</option>
+					<option value="1 year">1 year</option>
+					<option value="6 months">6 months</option>
+					<option value="1 month">1 month</option>
+					<option value="1 week">1 week</option>
 				</select>
 
-				<br><br><br>
-
+				<br><br>
 				<div id="medications">
 
 					<table id="medtable" class="table">
